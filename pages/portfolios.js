@@ -12,7 +12,7 @@ const fetchPortfolio = async (id) => {
 
 const PortfolioPage = ({ wallet }) => {
   const content = useMemo(() => {
-    const { walletName, totalAssets, asserts } = wallet
+    const { name, totalAssets, asserts } = wallet
     const columns = [
       {
         title: 'ASSETS',
@@ -56,7 +56,7 @@ const PortfolioPage = ({ wallet }) => {
     return (
       <>
         <div className="grid grid-cols-1 gap-4">
-          <div className="text-xl font-semibold text-center">{walletName}</div>
+          <div className="text-xl font-semibold text-center">{name}</div>
           <div className="flex text-base justify-end">
             <div>Total Assets</div>
             <div className="font-semibold ml-1">{numeral(totalAssets).format('$0,0[.][000]')}</div>
