@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Table } from 'antd'
 import numeral from 'numeral'
+import Head from 'next/head'
 
 import { Layout } from 'components/Layout'
 import API from 'pages/api'
@@ -11,7 +12,7 @@ const fetchPortfolio = async (id) => {
   return portfolio
 }
 
-const PortfolioPage = ({ wallet }) => {
+const PortfolioPage = ({ wallet = {} }) => {
   const content = useMemo(() => {
     const { name, totalAssets, asserts } = wallet
     const columns = [
@@ -79,7 +80,14 @@ const PortfolioPage = ({ wallet }) => {
     )
   }, [wallet])
 
-  return <Layout>{content}</Layout>
+  return (
+    <>
+      <Head>
+        <title>Portfolio</title>
+      </Head>
+      <Layout>{content}</Layout>
+    </>
+  )
 }
 
 export async function getServerSideProps({ query }) {

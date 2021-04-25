@@ -41,3 +41,5 @@ export const cleanBody = (data) => {
 
   return cleaned
 }
+
+export const hashAddress = (address) => `${address.slice(0, 6)}.....${address.slice(-6)}`
