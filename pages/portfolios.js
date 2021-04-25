@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
-import Layout from 'components/atoms/Layout'
-import Table from 'components/atoms/Table'
+import { Table } from 'antd'
 import numeral from 'numeral'
+
+import { Layout } from 'components/Layout'
 import API from 'pages/api'
 
 const fetchPortfolio = async (id) => {
@@ -12,13 +13,13 @@ const fetchPortfolio = async (id) => {
 
 const PortfolioPage = ({ wallet }) => {
   const content = useMemo(() => {
-    const { walletName, totalAssets, asserts } = wallet
+    const { name, totalAssets, asserts } = wallet
     const columns = [
       {
         title: 'ASSETS',
         dataIndex: 'ticker',
         key: 'ticker',
-        className: 'text-base',
+        className: 'text-base min-w-180',
         render: (value, record) => {
           const logo = record.logo.length ? record.logo : '/logo.png'
           return (
@@ -34,6 +35,7 @@ const PortfolioPage = ({ wallet }) => {
         dataIndex: 'balance',
         key: 'balance',
         className: 'text-base',
+
         render: (value) => numeral(value).format('0,0[.][0000]'),
       },
       {
@@ -41,6 +43,7 @@ const PortfolioPage = ({ wallet }) => {
         dataIndex: 'currentPrice',
         key: 'currentPrice',
         className: 'text-base',
+
         render: (value) => numeral(value).format('$0,0[.][000]'),
       },
       {
@@ -56,7 +59,7 @@ const PortfolioPage = ({ wallet }) => {
     return (
       <>
         <div className="grid grid-cols-1 gap-4">
-          <div className="text-xl font-semibold text-center">{walletName}</div>
+          <div className="text-xl font-semibold text-center">{name}</div>
           <div className="flex text-base justify-end">
             <div>Total Assets</div>
             <div className="font-semibold ml-1">{numeral(totalAssets).format('$0,0[.][000]')}</div>
@@ -67,7 +70,8 @@ const PortfolioPage = ({ wallet }) => {
               dataSource={asserts}
               pagination={false}
               rowKey="contractAddress"
-              scroll={{ x: 700 }}
+              scroll={{ x: 200 }}
+              size="small"
             />
           </div>
         </div>

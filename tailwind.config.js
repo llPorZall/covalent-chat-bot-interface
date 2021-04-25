@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
     screens: {
       xs: '576px',
@@ -10,6 +10,9 @@ module.exports = {
       lg: '1200px',
       xl: '1366px',
       '2xl': '1600px',
+    },
+    minWidth: {
+      180: '180px',
     },
     extend: {},
   },

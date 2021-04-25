@@ -1,9 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
-import Layout from 'components/atoms/Layout'
 import { Button, Card } from 'antd'
-
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
+import { Layout } from 'components/Layout'
 import API from 'pages/api'
 
 const fetchTransactions = async (id, page = 0) => {
@@ -24,13 +23,7 @@ const TransactionPage = ({ wallet: initalWallet, id }) => {
   }, [])
 
   const content = useMemo(() => {
-    const {
-      pagination: { hasMore, pageNumber },
-      name,
-      address,
-      addressLink,
-      transactions,
-    } = wallet
+    const { pagination, name, address, addressLink, transactions } = wallet
 
     const addressHash = `${address.slice(0, 6)}.....${address.slice(-6)}`
     return (
@@ -50,28 +43,31 @@ const TransactionPage = ({ wallet: initalWallet, id }) => {
                   {txHash}
                 </a>
               </div>
-              <div className="flex flex-1 justify-center">{transactionType}</div>
+              <div className="flex flex-1 justify-center font-semibold">{transactionType}</div>
               <div className="flex-1 text-right">Gas Fee : {gasFeeValue}</div>
             </div>
           </Card>
         ))}
-        <div className="flex justify-center items-center">
-          <Button
-            disabled={pageNumber === 0}
-            icon={<LeftOutlined style={{ verticalAlign: 0 }} />}
-            onClick={() => {
-              onChangePage(pageNumber - 1)
-            }}
-          />
-          <Button className="mx-2">{pageNumber + 1}</Button>
-          <Button
-            disabled={!hasMore}
-            icon={<RightOutlined style={{ verticalAlign: 0 }} />}
-            onClick={() => {
-              onChangePage(pageNumber + 1)
-            }}
-          />
-        </div>
+
+        {pagination && (
+          <div className="flex justify-center items-center">
+            <Button
+              disabled={pagination.pageNumber === 0}
+              icon={<LeftOutlined style={{ verticalAlign: 0 }} />}
+              onClick={() => {
+                onChangePage(pagination.pageNumber - 1)
+              }}
+            />
+            <Button className="mx-2">{pagination.pageNumber + 1}</Button>
+            <Button
+              disabled={!pagination.hasMore}
+              icon={<RightOutlined style={{ verticalAlign: 0 }} />}
+              onClick={() => {
+                onChangePage(pagination.pageNumber + 1)
+              }}
+            />
+          </div>
+        )}
       </>
     )
   }, [wallet])
