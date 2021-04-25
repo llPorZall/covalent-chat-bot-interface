@@ -42,5 +42,4 @@ export const responseInterceptor = ({ data }) => {
 
 axios.interceptors.request.use(requestInterceptor, errorInterceptor)
 axios.interceptors.response.use(responseInterceptor, errorInterceptor)
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://localhost:8001'
 export { axios as default, Axios as axios }

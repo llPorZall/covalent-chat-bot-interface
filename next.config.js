@@ -1,4 +1,3 @@
-console.log('config : ' + process.env.API_ENDPOINT)
 module.exports = {
   images: {
     domains: ['logos.covalenthq.com'],
