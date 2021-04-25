@@ -3,3 +3,12 @@
 @tailwind utilities;
 
 @import 'antd/dist/antd.css';
+
+.test {
+  will-change: transform;
+  backface-visibility: hidden;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(26px);
+  box-shadow: rgb(0 0 0 / 1%) 16px 1px 14px;
+  padding: 0.5rem 1rem 1rem;
+}
